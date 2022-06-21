@@ -27,12 +27,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         pokemonsManager.getPokemonRequest()
         pokemonsManager.getPokemonStats()
     }
-        
+    
+    // Return the number of rows in a given section of a table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Tra ve so phan tu trong mang
         return pokemonArray.count
         
     }
     
+    // Show data in cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCellView") as! PokemonCell
         cell.PokemonName.font = nameSyle
@@ -49,7 +52,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    // Tells the delegate a row is selected.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Create a UIStroyboard with with identify = Details
         let detailsView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Details") as! PokemonDetails
         detailsView.pokeName = pokemonArray[indexPath.row].name
         detailsView.pokeType = pokemonArray[indexPath.row].type
@@ -59,7 +64,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         detailsView.pokeWeight = pokemonArray[indexPath.row].weight
         detailsView.pokeNum = pokemonArray[indexPath.row].num
         
-        //        Data for Pokemon Stats
+        // Data for Pokemon Stats
         detailsView.statsHP = pokemonStatsArray[indexPath.row].HP
         detailsView.statsAttack = pokemonStatsArray[indexPath.row].Attack
         detailsView.statsDefense = pokemonStatsArray[indexPath.row].Defense
